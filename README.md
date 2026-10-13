@@ -2,11 +2,11 @@
 
 A collection of my Generative AI projects and experiments built while learning about Large Language Models (LLMs), LangChain, prompt engineering, structured outputs, chatbots, and Hugging Face.
 
-## Projects
+## Featured Projects
 
-### 1. CineSage
+### 1. CineSage — Movie Information Extractor
 
-A project exploring LLM-powered applications using LangChain.
+An LLM-powered application exploring movie information extraction using LangChain.
 
 **What's included:**
 - Core LLM interaction
@@ -14,11 +14,13 @@ A project exploring LLM-powered applications using LangChain.
 - Structured output with Pydantic
 - Streamlit interfaces
 
-**Files:** `CineSage/`
+**Folder:** [`CineSage/`](CineSage/)
 
-### 2. Chat Models
+**Documentation:** [CineSage README](CineSage/README.md)
 
-Experiments with conversational AI and different model integrations.
+### 2. AI Assistant Chatbot
+
+A collection of conversational AI implementations exploring different language models and chatbot interfaces.
 
 **What's included:**
 - Chatbot implementations
@@ -26,13 +28,19 @@ Experiments with conversational AI and different model integrations.
 - Hugging Face model experiments
 - Streamlit chatbot interface
 
-**Files:** `chatmodels/`
+**Folder:** [`chatmodels/`](chatmodels/)
 
-### 3. Embedding Models
+**Documentation:** [Chat Models README](chatmodels/README.md)
 
-Experiments with text embedding models using Hugging Face integrations.
+## Experiments
 
-**Files:** `embeddingmodels/`
+### Embedding Models
+
+A learning experiment using Hugging Face sentence-transformer models to convert text into numerical vector representations.
+
+**Folder:** [`embeddingmodels/`](embeddingmodels/)
+
+**Documentation:** [Embedding Models README](embeddingmodels/README.md)
 
 ## Tech Stack
 
@@ -52,15 +60,18 @@ GenAI-Projects/
 │   ├── core.py
 │   ├── structured.py
 │   ├── UIcore.py
-│   └── UIstructured.py
+│   ├── UIstructured.py
+│   └── README.md
 ├── chatmodels/
 │   ├── chat.py
 │   ├── chatbot.py
 │   ├── UIchatbot.py
 │   ├── hugingface.py
-│   └── localmodel.py
+│   ├── localmodel.py
+│   └── README.md
 ├── embeddingmodels/
-│   └── embidding.py
+│   ├── embidding.py
+│   └── README.md
 ├── .gitignore
 ├── requirements.txt
 └── README.md
