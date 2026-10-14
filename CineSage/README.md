@@ -1,16 +1,17 @@
 # CineSage — Movie Information Extractor
 
-CineSage is a Generative AI project that extracts useful information from movie-related paragraphs using LangChain and a Groq-hosted language model.
+CineSage is a Generative AI project that extracts structured movie information from user-provided text using LangChain and a Groq-hosted language model.
 
-The project explores two approaches to information extraction: prompt-based text generation and structured output using Pydantic.
+It explores two approaches to information extraction: prompt-based generation and schema-based structured output with Pydantic.
 
 ## Features
 
-- Extracts movie information from user-provided paragraphs.
-- Identifies details such as title, director, release year, genre, cast, plot, setting, themes, and music composer.
-- Uses LangChain prompt templates to guide the model.
-- Supports structured output using a Pydantic model.
-- Includes Streamlit-based interfaces for interacting with the extraction workflows.
+- Extracts movie information from descriptive paragraphs.
+- Identifies the title, director, release year, genre, cast, plot, setting, themes, and music composer.
+- Uses LangChain prompt templates to guide extraction.
+- Supports structured responses through Pydantic models.
+- Provides Streamlit interfaces for interactive use.
+- Includes both terminal-based and graphical implementations.
 
 ## Implementations
 
@@ -18,13 +19,18 @@ The project explores two approaches to information extraction: prompt-based text
 
 **File:** `core.py`
 
-Uses `PromptTemplate` to instruct the language model to extract movie information into a predefined, human-readable format.
+Uses LangChain's `PromptTemplate` to guide the language model in extracting movie details into a predefined, human-readable format.
 
 ### 2. Structured Extraction
 
 **File:** `structured.py`
 
-Uses `ChatPromptTemplate`, a Pydantic `MovieInfo` model, and `PydanticOutputParser` to parse the model's response into structured movie data.
+Uses `ChatPromptTemplate`, a Pydantic `MovieInfo` model, and `PydanticOutputParser` to organize the language model's response into a predefined schema.
+
+### Streamlit Interfaces
+
+- `UIcore.py` — Interface for the core extraction workflow.
+- `UIstructured.py` — Interface for the structured extraction workflow.
 
 ## Tech Stack
 
@@ -48,7 +54,7 @@ CineSage/
 
 ## Setup
 
-1. Install the dependencies from the repository's root `requirements.txt`.
+1. Install the dependencies listed in the repository's root `requirements.txt`.
 2. Create a `.env` file in the repository root.
 3. Add your Groq API key:
 
@@ -56,31 +62,31 @@ CineSage/
 GROQ_API_KEY=your_groq_api_key
 ```
 
-Keep your API key private and never commit your `.env` file.
+**Security:** Keep your API key private. Never commit `.env` files or API credentials to GitHub.
 
 ## Run the Applications
 
 Run these commands from the repository root.
 
-**Core extraction — terminal version**
+**Core extraction — terminal**
 
 ```bash
 python CineSage/core.py
 ```
 
-**Structured extraction — terminal version**
+**Structured extraction — terminal**
 
 ```bash
 python CineSage/structured.py
 ```
 
-**Core extraction — Streamlit interface**
+**Core extraction — Streamlit**
 
 ```bash
 streamlit run CineSage/UIcore.py
 ```
 
-**Structured extraction — Streamlit interface**
+**Structured extraction — Streamlit**
 
 ```bash
 streamlit run CineSage/UIstructured.py
@@ -88,10 +94,10 @@ streamlit run CineSage/UIstructured.py
 
 ## Notes
 
-- The language model extracts information from the paragraph supplied by the user.
-- Results depend on the input text and model response; verify important information independently.
-- The configured model must be available through your Groq account.
-- Structured extraction expects the model response to conform to the defined Pydantic schema.
+- Extraction results depend on the supplied text and the language model's response.
+- Verify important movie information independently, as generated details may be inaccurate.
+- The configured model must be accessible through your Groq account.
+- Structured extraction relies on the output matching the defined Pydantic schema.
 
 ## Author
 
