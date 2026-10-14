@@ -1,47 +1,51 @@
-# CineSage — Movie Information Extractor
+# 🎬 CineSage — AI-Powered Movie Intelligence
 
-CineSage is a Generative AI project that extracts structured movie information from user-provided text using LangChain and a Groq-hosted language model.
+Turn movie descriptions into structured information with Generative AI.
 
-It explores two approaches to information extraction: prompt-based generation and schema-based structured output with Pydantic.
+CineSage is a GenAI application that extracts useful movie details from user-provided text using **LangChain, Groq, and Pydantic**. It transforms unstructured paragraphs into organized information through an interactive Streamlit interface.
 
-## Features
+<p align="center">
 
-- Extracts movie information from descriptive paragraphs.
-- Identifies the title, director, release year, genre, cast, plot, setting, themes, and music composer.
-- Uses LangChain prompt templates to guide extraction.
-- Supports structured responses through Pydantic models.
-- Provides Streamlit interfaces for interactive use.
-- Includes both terminal-based and graphical implementations.
+  **[🚀 Try the Live Demo](https://genai-projects-3hmgd8gx28e4nhzuhnp6xp.streamlit.app/)**
 
-## Implementations
+</p>
 
-### 1. Core Extraction
+## ✨ Features
 
-**File:** `core.py`
+- **Structured Information Extraction** — Extract movie details from descriptive text.
+- **Movie Metadata** — Identify the title, director, release year, genre, and IMDb rating when provided.
+- **Cast & Story Analysis** — Organize cast members, plot, setting, themes, and music composer.
+- **Schema-Based Output** — Use Pydantic to structure model responses.
+- **Interactive Web Interface** — Explore extracted information in a polished, dark-themed Streamlit UI.
+- **JSON Export** — Download structured movie results as a JSON file.
+- **Two Extraction Approaches** — Compare prompt-based generation with schema-based extraction.
 
-Uses LangChain's `PromptTemplate` to guide the language model in extracting movie details into a predefined, human-readable format.
+## 🖥️ Live Application
 
-### 2. Structured Extraction
+**[Open CineSage](https://genai-projects-3hmgd8gx28e4nhzuhnp6xp.streamlit.app/)**
 
-**File:** `structured.py`
+Paste a movie description, run the extraction, explore the organized results, and download the structured output.
 
-Uses `ChatPromptTemplate`, a Pydantic `MovieInfo` model, and `PydanticOutputParser` to organize the language model's response into a predefined schema.
+## 🧠 How It Works
 
-### Streamlit Interfaces
+1. **Input:** The user provides a paragraph containing movie information.
+2. **Prompt Engineering:** LangChain constructs a prompt with extraction instructions.
+3. **LLM Processing:** A Groq-hosted language model processes the text.
+4. **Structured Parsing:** Pydantic and `PydanticOutputParser` organize the response according to the defined schema.
+5. **Presentation:** Streamlit displays the extracted information in readable sections and provides a JSON download.
 
-- `UIcore.py` — Interface for the core extraction workflow.
-- `UIstructured.py` — Interface for the structured extraction workflow.
+## 🛠️ Tech Stack
 
-## Tech Stack
+| Technology | Purpose |
+|---|---|
+| Python | Core programming language |
+| LangChain | Prompt construction and LLM integration |
+| Groq | Hosted language model inference |
+| Pydantic | Structured data validation |
+| Streamlit | Interactive web interface |
+| python-dotenv | Local environment variable management |
 
-- Python
-- LangChain
-- Groq
-- Pydantic
-- Streamlit
-- Python-dotenv
-
-## Project Structure
+## 📂 Project Structure
 
 ```text
 CineSage/
@@ -49,22 +53,46 @@ CineSage/
 ├── structured.py
 ├── UIcore.py
 ├── UIstructured.py
+├── requirements.txt
 └── README.md
 ```
 
-## Setup
+- `core.py` — Prompt-based movie information extraction.
+- `structured.py` — Schema-based extraction using Pydantic.
+- `UIcore.py` — Streamlit interface for the core extraction approach.
+- `UIstructured.py` — Enhanced Streamlit interface with structured results and JSON export.
+- `requirements.txt` — Dependencies required by the CineSage Streamlit application.
 
-1. Install the dependencies listed in the repository's root `requirements.txt`.
-2. Create a `.env` file in the repository root.
-3. Add your Groq API key:
+## ⚙️ Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/bansod-dev/GenAI-Projects.git
+cd GenAI-Projects
+```
+
+### 2. Install dependencies
+
+For CineSage, install its dedicated requirements:
+
+```bash
+pip install -r CineSage/requirements.txt
+```
+
+### 3. Configure the Groq API key
+
+Create a `.env` file in the repository root and add:
 
 ```text
 GROQ_API_KEY=your_groq_api_key
 ```
 
-**Security:** Keep your API key private. Never commit `.env` files or API credentials to GitHub.
+Obtain an API key through the [Groq Console](https://console.groq.com/).
 
-## Run the Applications
+**Security:** Never commit your `.env` file, API keys, or other credentials to GitHub. The deployed application uses Streamlit Cloud Secrets for its API key configuration.
+
+## ▶️ Run the Applications
 
 Run these commands from the repository root.
 
@@ -92,15 +120,24 @@ streamlit run CineSage/UIcore.py
 streamlit run CineSage/UIstructured.py
 ```
 
-## Notes
+## ⚠️ Limitations
 
-- Extraction results depend on the supplied text and the language model's response.
-- Verify important movie information independently, as generated details may be inaccurate.
-- The configured model must be accessible through your Groq account.
-- Structured extraction relies on the output matching the defined Pydantic schema.
+- Extraction quality depends on the supplied text and the language model's response.
+- Missing information may be returned as "Not mentioned" or a null value, depending on the field.
+- Generated results may contain inaccuracies; verify important information independently.
+- The configured Groq model must be available to your account.
+- Structured extraction depends on the model response being compatible with the defined Pydantic schema.
 
-## Author
+## 👨‍💻 Author
 
 **Ghanshyam Bansod**
 
 AI & Data Science Student | Aspiring Data Scientist
+
+- **GitHub:** [bansod-dev](https://github.com/bansod-dev)
+- **Project Repository:** [GenAI-Projects](https://github.com/bansod-dev/GenAI-Projects)
+- **Live Demo:** [CineSage](https://genai-projects-3hmgd8gx28e4nhzuhnp6xp.streamlit.app/)
+
+---
+
+*Built to explore prompt engineering, structured LLM outputs, and practical Generative AI application development.*
