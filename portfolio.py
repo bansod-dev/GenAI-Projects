@@ -1,13 +1,24 @@
 
 import streamlit as st
+from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 
+load_dotenv()
+
+# -----------------------------
+# Page configuration
+# -----------------------------
 st.set_page_config(
-    page_title="GenAI | Portfolio",
+    page_title="Dark AI | Assistant",
     page_icon="✦",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
+# -----------------------------
+# Dark AI styling
+# -----------------------------
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -15,8 +26,8 @@ st.markdown("""
 .stApp {
     background:
         radial-gradient(ellipse at 10% 0%, #241044 0%, transparent 38%),
-        radial-gradient(ellipse at 95% 25%, #102647 0%, transparent 35%),
-        #080a10;
+        radial-gradient(ellipse at 95% 20%, #102647 0%, transparent 35%),
+        #08090e;
     color: #f4f4fa;
     font-family: 'Inter', sans-serif;
 }
@@ -26,9 +37,9 @@ header[data-testid="stHeader"] {
 }
 
 .block-container {
-    max-width: 1120px;
+    max-width: 1050px;
     padding-top: 2rem;
-    padding-bottom: 4rem;
+    padding-bottom: 5rem;
 }
 
 #MainMenu, footer {
@@ -36,7 +47,7 @@ header[data-testid="stHeader"] {
 }
 
 .hero {
-    padding: 65px 0 45px 0;
+    padding: 22px 0 24px 0;
 }
 
 .eyebrow {
@@ -46,311 +57,305 @@ header[data-testid="stHeader"] {
     border: 1px solid #493276;
     padding: 8px 15px;
     border-radius: 30px;
-    font-size: 13px;
-    letter-spacing: 1px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
 }
 
-.hero h1 {
-    font-size: clamp(42px, 7vw, 76px);
-    line-height: 1.08;
-    letter-spacing: -3px;
+.hero-title {
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.12;
+    letter-spacing: -2px;
     font-weight: 800;
-    margin: 25px 0 18px 0;
+    margin: 25px 0 15px 0;
     color: #ffffff;
 }
 
 .gradient-text {
-    background: linear-gradient(90deg, #a78bfa, #60a5fa, #5eead4);
+    background: linear-gradient(90deg, #c4b5fd, #818cf8, #67e8f9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.hero p {
-    color: #aaaabd;
-    font-size: 17px;
+.hero-subtitle {
+    color: #a3a3b8;
+    font-size: 15px;
     line-height: 1.8;
-    max-width: 680px;
+    max-width: 650px;
+}
+
+.status-pill {
+    display: inline-block;
+    border: 1px solid #283d37;
+    background: #101b19;
+    color: #86efac;
+    border-radius: 30px;
+    padding: 8px 13px;
+    font-size: 12px;
+    margin-top: 12px;
 }
 
 .section-label {
     color: #a78bfa;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.section-heading {
-    color: #f8fafc;
-    font-size: 32px;
-    font-weight: 750;
-    margin: 8px 0 24px 0;
-    letter-spacing: -1px;
-}
-
-.project-card {
-    background: linear-gradient(145deg, #151522, #0e111b);
-    border: 1px solid #29283b;
-    border-radius: 20px;
-    padding: 27px;
-    min-height: 260px;
-    margin-bottom: 15px;
-    transition: border-color .2s ease, transform .2s ease;
-}
-
-.project-card:hover {
-    border-color: #8b5cf6;
-    transform: translateY(-4px);
-}
-
-.project-icon {
-    font-size: 30px;
-    margin-bottom: 18px;
-}
-
-.project-card h3 {
-    color: #ffffff;
-    font-size: 22px;
-    margin: 0 0 12px 0;
-}
-
-.project-card p {
-    color: #a7a7bc;
-    line-height: 1.7;
-    font-size: 14px;
-    min-height: 72px;
-}
-
-.tag {
-    display: inline-block;
-    background: #211b37;
-    color: #c4b5fd;
-    padding: 6px 10px;
-    border-radius: 7px;
     font-size: 11px;
-    margin: 3px 3px 0 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 25px 0 14px 0;
 }
 
-.info-panel {
-    background: linear-gradient(120deg, #171326, #101a2c);
-    border: 1px solid #30294b;
-    border-radius: 20px;
-    padding: 25px;
-    margin: 12px 0 28px 0;
+/* Personality selector */
+div[data-testid="stSelectbox"] label {
+    color: #c4b5fd !important;
+    font-weight: 600;
 }
 
-.metric-number {
-    color: #c4b5fd;
-    font-size: 27px;
-    font-weight: 800;
+div[data-testid="stSelectbox"] > div > div {
+    background: #12121d;
+    border-color: #493276;
+    border-radius: 12px;
 }
 
-.metric-caption {
-    color: #a5a5ba;
-    font-size: 12px;
+/* Chat messages */
+div[data-testid="stChatMessage"] {
+    background: rgba(20, 20, 33, 0.85);
+    border: 1px solid #29273a;
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
 }
 
-.stButton > button, .stLinkButton > a {
+div[data-testid="stChatInput"] {
+    border: 1px solid #493276;
+    border-radius: 16px;
+    background: #11111b;
+    box-shadow: 0 0 24px rgba(139, 92, 246, 0.10);
+}
+
+div[data-testid="stChatInput"] textarea {
+    color: #f4f4fa;
+}
+
+.stButton > button {
     background: linear-gradient(100deg, #7c3aed, #4f46e5);
     color: white !important;
     border: 1px solid #8b5cf6;
     border-radius: 10px;
-    padding: 10px 22px;
     font-weight: 600;
 }
 
-.stButton > button:hover, .stLinkButton > a:hover {
+.stButton > button:hover {
     border-color: #c4b5fd;
-    color: white !important;
-}
-
-a {
-    color: #c4b5fd !important;
 }
 
 hr {
-    border-color: #272536;
-    margin: 35px 0;
+    border-color: #292638;
+    margin: 28px 0;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 42px 18px;
+    background: rgba(20, 20, 33, 0.55);
+    border: 1px solid #29273a;
+    border-radius: 18px;
+    margin: 15px 0 25px 0;
+}
+
+.empty-icon {
+    font-size: 35px;
+    color: #c4b5fd;
+    margin-bottom: 12px;
+}
+
+.empty-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.empty-subtitle {
+    color: #9696ad;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .footer {
     text-align: center;
-    color: #77778f;
-    font-size: 12px;
-    padding: 30px 0 10px 0;
+    color: #73738a;
+    font-size: 11px;
+    padding-top: 25px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 640px) {
+    .block-container {
+        padding: 1rem 1rem 5rem 1rem;
+    }
+
+    .hero-title {
+        letter-spacing: -1px;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
 
 
-# Navigation
-nav1, nav2 = st.columns([3, 1])
-
-with nav1:
-    st.markdown(
-        "<span style='font-size:20px;font-weight:800;'>✦ <span "
-        "style='color:#a78bfa'>GEN</span>AI.PORTFOLIO</span>",
-        unsafe_allow_html=True
-    )
-
-with nav2:
-    st.link_button(
-        "GitHub ↗",
-        "https://github.com/bansod-dev/GenAI-Projects",
-        use_container_width=True
-    )
-
-
-# Hero section
+# -----------------------------
+# Header — HTML rendered correctly
+# -----------------------------
 st.markdown("""
 <div class="hero">
-    <span class="eyebrow">✦ &nbsp; EXPLORING THE WORLD OF AI</span>
-    <h1>Building things<br>with <span class="gradient-text">intelligence.</span></h1>
-    <p>
-        Hey, I'm an AI &amp; Data Science student exploring Generative AI,
-        Large Language Models, and intelligent applications.
-        This is where my experiments turn into projects.
-    </p>
+    <span class="eyebrow">✦ &nbsp; INTELLIGENT CONVERSATION</span>
+
+    <div class="hero-title">
+        Your thoughts.<br>
+        <span class="gradient-text">Amplified by AI.</span>
+    </div>
+
+    <div class="hero-subtitle">
+        Your personal AI assistant for learning, exploring,
+        and thinking through ideas.
+    </div>
+
+    <div class="status-pill">● &nbsp; AI ASSISTANT</div>
 </div>
 """, unsafe_allow_html=True)
 
-st.link_button(
-    "Explore my projects ↓",
-    "https://github.com/bansod-dev/GenAI-Projects"
-)
-
-st.markdown("""
-<div class="info-panel">
-  <div class="section-label">CURRENT FOCUS</div>
-  <div style="font-size:20px;font-weight:700;margin:10px 0;">
-    Generative AI · LLM Applications · Intelligent Systems
-  </div>
-  <div style="color:#a7a7bc;font-size:14px;">
-    Learning by building, experimenting, and shipping projects.
-  </div>
-</div>
-""", unsafe_allow_html=True)
-
-
-# Projects
-st.markdown('<div class="section-label">SELECTED WORK</div>',
-            unsafe_allow_html=True)
-st.markdown('<div class="section-heading">Projects that I\'ve built.</div>',
-            unsafe_allow_html=True)
-
-col1, col2 = st.columns(2, gap="large")
-
-with col1:
-    st.markdown("""
-    <div class="project-card">
-        <div class="project-icon">🎬</div>
-        <h3>CineSage</h3>
-        <p>
-            An LLM-powered movie information application exploring
-            prompt templates, structured outputs, and LangChain.
-        </p>
-        <span class="tag">LANGCHAIN</span>
-        <span class="tag">GROQ</span>
-        <span class="tag">PYDANTIC</span>
-        <span class="tag">STREAMLIT</span>
-    </div>
-    """, unsafe_allow_html=True)
-    st.link_button(
-        "Explore CineSage ↗",
-        "https://github.com/bansod-dev/GenAI-Projects/tree/main/CineSage",
-        use_container_width=True
-    )
-
-with col2:
-    st.markdown("""
-    <div class="project-card">
-        <div class="project-icon">🤖</div>
-        <h3>AI Assistant Chatbot</h3>
-        <p>
-            Conversational AI experiments exploring different language
-            models, chatbot personalities, and interactive interfaces.
-        </p>
-        <span class="tag">PYTHON</span>
-        <span class="tag">GROQ</span>
-        <span class="tag">HUGGING FACE</span>
-        <span class="tag">LLMs</span>
-    </div>
-    """, unsafe_allow_html=True)
-    st.link_button(
-        "Explore Chat Models ↗",
-        "https://github.com/bansod-dev/GenAI-Projects/tree/main/chatmodels",
-        use_container_width=True
-    )
-
-col3, col4 = st.columns(2, gap="large")
-
-with col3:
-    st.markdown("""
-    <div class="project-card">
-        <div class="project-icon">🧠</div>
-        <h3>Text Embeddings</h3>
-        <p>
-            An experiment converting text into numerical vector
-            representations using a sentence-transformer model.
-        </p>
-        <span class="tag">EMBEDDINGS</span>
-        <span class="tag">HUGGING FACE</span>
-        <span class="tag">LANGCHAIN</span>
-    </div>
-    """, unsafe_allow_html=True)
-    st.link_button(
-        "Explore Embeddings ↗",
-        "https://github.com/bansod-dev/GenAI-Projects/tree/main/embeddingmodels",
-        use_container_width=True
-    )
-
-with col4:
-    st.markdown("""
-    <div class="project-card">
-        <div class="project-icon">⚡</div>
-        <h3>LLM Experiments</h3>
-        <p>
-            A collection of experiments with chat models, local inference,
-            and Hugging Face integrations as I explore the LLM ecosystem.
-        </p>
-        <span class="tag">LLMs</span>
-        <span class="tag">PYTHON</span>
-        <span class="tag">MODEL EXPLORATION</span>
-    </div>
-    """, unsafe_allow_html=True)
-    st.link_button(
-        "View all experiments ↗",
-        "https://github.com/bansod-dev/GenAI-Projects/tree/main/chatmodels",
-        use_container_width=True
-    )
-
-
-# Tech stack
 st.markdown("<hr>", unsafe_allow_html=True)
 
-st.markdown('<div class="section-label">MY TOOLKIT</div>',
-            unsafe_allow_html=True)
-st.markdown('<div class="section-heading">Tools I work with.</div>',
-            unsafe_allow_html=True)
 
-st.markdown("""
-<div style="line-height:2.8;">
-  <span class="tag">PYTHON</span>
-  <span class="tag">LANGCHAIN</span>
-  <span class="tag">GROQ</span>
-  <span class="tag">HUGGING FACE</span>
-  <span class="tag">STREAMLIT</span>
-  <span class="tag">PYDANTIC</span>
-  <span class="tag">GIT</span>
-  <span class="tag">GITHUB</span>
-</div>
-""", unsafe_allow_html=True)
+# -----------------------------
+# Groq model
+# -----------------------------
+model = ChatGroq(
+    model="openai/gpt-oss-20b",
+    temperature=0
+)
 
+
+# -----------------------------
+# AI personalities
+# -----------------------------
+modes = {
+    "😡 Angry Mode": (
+        "You are an angry AI assistant teacher. "
+        "Use playful sarcasm and an angry tone, but remain helpful. "
+        "Do not use threats or hateful language."
+    ),
+    "😌 Calm Mode": (
+        "You are a calm AI assistant teacher. "
+        "Be polite, respectful, patient, supportive, and clear. "
+        "Explain concepts simply."
+    ),
+    "😂 Funny Mode": (
+        "You are a funny AI assistant teacher. "
+        "Be witty, playful, and entertaining while providing "
+        "accurate and useful answers."
+    )
+}
+
+
+# -----------------------------
+# Session state
+# -----------------------------
+if "message_history" not in st.session_state:
+    st.session_state.message_history = []
+
+if "selected_mode" not in st.session_state:
+    st.session_state.selected_mode = "😌 Calm Mode"
+
+
+# -----------------------------
+# Personality selector
+# -----------------------------
+st.markdown(
+    '<div class="section-label">01 / CHOOSE YOUR PERSONALITY</div>',
+    unsafe_allow_html=True
+)
+
+selected_mode = st.selectbox(
+    "AI personality",
+    options=list(modes.keys()),
+    index=list(modes.keys()).index(
+        st.session_state.selected_mode
+    ),
+    label_visibility="collapsed"
+)
+
+st.session_state.selected_mode = selected_mode
+
+
+# -----------------------------
+# Conversation
+# -----------------------------
+st.markdown(
+    '<div class="section-label">02 / YOUR CONVERSATION</div>',
+    unsafe_allow_html=True
+)
+
+if not st.session_state.message_history:
+    st.markdown("""
+    <div class="empty-state">
+        <div class="empty-icon">✦</div>
+        <div class="empty-title">Start a conversation</div>
+        <div class="empty-subtitle">
+            Ask a question, explore an idea, or learn something new.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+# Display previous messages
+for message in st.session_state.message_history:
+    if isinstance(message, HumanMessage):
+        with st.chat_message("user"):
+            st.write(message.content)
+
+    elif isinstance(message, AIMessage):
+        with st.chat_message("assistant", avatar="🤖"):
+            st.write(message.content)
+
+
+# -----------------------------
+# Chat input and response
+# -----------------------------
+prompt = st.chat_input("Message your AI assistant...")
+
+if prompt:
+    user_message = HumanMessage(content=prompt)
+    st.session_state.message_history.append(user_message)
+
+    with st.chat_message("user"):
+        st.write(prompt)
+
+    conversation = [
+        SystemMessage(content=modes[st.session_state.selected_mode]),
+        *st.session_state.message_history
+    ]
+
+    with st.chat_message("assistant", avatar="🤖"):
+        with st.spinner("Thinking..."):
+            try:
+                response = model.invoke(conversation)
+                st.write(response.content)
+
+                st.session_state.message_history.append(
+                    AIMessage(content=response.content)
+                )
+
+            except Exception as error:
+                st.error(f"Could not generate a response: {error}")
+
+
+# -----------------------------
+# Footer
+# -----------------------------
 st.markdown("<hr>", unsafe_allow_html=True)
 
 st.markdown("""
 <div class="footer">
-    DESIGNED WITH PYTHON &nbsp;·&nbsp; POWERED BY CURIOSITY<br><br>
-    © 2026 · GenAI Portfolio
+    BUILT WITH PYTHON &nbsp;·&nbsp; POWERED BY AI<br><br>
+    DARK AI · 2026
 </div>
 """, unsafe_allow_html=True)
