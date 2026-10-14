@@ -487,7 +487,7 @@ projects = [
         ),
         "tags": ["GenAI", "LLMs", "LangChain", "Streamlit"],
         "url": "https://github.com/bansod-dev/GenAI-Projects/tree/main/CineSage",
-        "demo": None,
+        "demo": "https://genai-projects-3hmgd8gx28e4nhzuhnp6xp.streamlit.app/",
     },
     {
         "category": "Machine Learning",
