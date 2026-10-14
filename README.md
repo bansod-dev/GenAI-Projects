@@ -1,28 +1,41 @@
 # Generative AI Projects
 
-A collection of my Generative AI projects and experiments built while learning about Large Language Models (LLMs), LangChain, prompt engineering, structured outputs, chatbots, and Hugging Face.
+A collection of Generative AI applications and experiments built while exploring Large Language Models (LLMs), LangChain, prompt engineering, structured outputs, chatbots, and text embeddings.
 
 ## Featured Projects
 
-### 1. CineSage — Movie Information Extractor
+### 1. Dark AI — AI Assistant
 
-An LLM-powered application exploring movie information extraction using LangChain.
+A Streamlit-based conversational AI assistant powered by Groq, featuring selectable AI personalities and a dark-themed interface.
 
-**What's included:**
-- Core LLM interaction
-- Prompt templates
-- Structured output with Pydantic
+**Features**
+- Interactive chatbot interface
+- Multiple AI personalities: Calm, Funny, and Angry
+- Conversational history
+- Streaming responses in the chatbot implementation
+
+**Technologies:** Python, Streamlit, LangChain, Groq
+
+**File:** [`portfolio.py`](portfolio.py)
+
+### 2. CineSage — Movie Information Extractor
+
+An LLM-powered application exploring movie information extraction and structured responses using LangChain.
+
+**Features**
+- LLM interaction and prompt templates
+- Structured outputs using Pydantic
 - Streamlit interfaces
 
 **Folder:** [`CineSage/`](CineSage/)
 
-**Documentation:** [CineSage README](CineSage/README.md)
+**Documentation:** [`CineSage README`](CineSage/README.md)
 
-### 2. AI Assistant Chatbot
+### 3. AI Assistant Chatbot Experiments
 
 A collection of conversational AI implementations exploring different language models and chatbot interfaces.
 
-**What's included:**
+**Features**
 - Chatbot implementations
 - Groq model integration
 - Hugging Face model experiments
@@ -30,65 +43,57 @@ A collection of conversational AI implementations exploring different language m
 
 **Folder:** [`chatmodels/`](chatmodels/)
 
-**Documentation:** [Chat Models README](chatmodels/README.md)
+**Documentation:** [`Chat Models README`](chatmodels/README.md)
 
-## Experiments
+## Other Experiments
 
-### Embedding Models
+### Text Embeddings
 
-A learning experiment using Hugging Face sentence-transformer models to convert text into numerical vector representations.
+An experiment exploring how sentence-transformer models convert text into numerical vector representations for semantic applications.
 
 **Folder:** [`embeddingmodels/`](embeddingmodels/)
 
-**Documentation:** [Embedding Models README](embeddingmodels/README.md)
+**Documentation:** [`Embedding Models README`](embeddingmodels/README.md)
 
 ## Tech Stack
 
-- Python
-- LangChain
-- Groq
-- Hugging Face
-- Streamlit
-- Pydantic
-- Python-dotenv
+- **Language:** Python
+- **LLM Framework:** LangChain
+- **Model Providers:** Groq, Hugging Face
+- **Interface:** Streamlit
+- **Structured Outputs:** Pydantic
+- **Configuration:** Python-dotenv
+- **Version Control:** Git and GitHub
 
 ## Project Structure
 
 ```text
 GenAI-Projects/
 ├── CineSage/
-│   ├── core.py
-│   ├── structured.py
-│   ├── UIcore.py
-│   ├── UIstructured.py
-│   └── README.md
 ├── chatmodels/
-│   ├── chat.py
-│   ├── chatbot.py
-│   ├── UIchatbot.py
-│   ├── hugingface.py
-│   ├── localmodel.py
-│   └── README.md
 ├── embeddingmodels/
-│   ├── embidding.py
-│   └── README.md
-├── .gitignore
+├── portfolio.py
 ├── requirements.txt
+├── .gitignore
 └── README.md
 ```
 
 ## Setup
 
 1. Clone this repository.
-2. Install the dependencies listed in `requirements.txt`.
-3. Create a `.env` file in the project root and add the API keys required by the specific project.
-4. Run the relevant Python or Streamlit file for the project you want to explore.
+2. Create and activate a Python virtual environment.
+3. Install the dependencies listed in `requirements.txt`.
+4. Configure the API keys required by your chosen project in a local `.env` file.
+5. Run the relevant Python or Streamlit entry point.
 
-**Note:** Required API keys, model access, and package versions may vary by project. Check the individual files before running them.
+Check each project's documentation for its specific dependencies, environment variables, and execution instructions.
 
 ## Security
 
-API keys and environment files are excluded from version control. Never commit secrets or private credentials.
+- Keep API keys and private credentials out of source code.
+- Store secrets in a local `.env` file.
+- Ensure `.env` and virtual environment directories are excluded from version control.
+- Never publish private API keys or tokens.
 
 ## Author
 
