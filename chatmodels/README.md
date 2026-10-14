@@ -1,6 +1,6 @@
 # Chat Models — LLM Experiments
 
-A collection of Generative AI experiments exploring conversational models using LangChain, Groq, Hugging Face, and Streamlit.
+A collection of Generative AI experiments exploring conversational language models, remote inference, local model pipelines, and interactive chatbot interfaces.
 
 ## Projects
 
@@ -8,37 +8,41 @@ A collection of Generative AI experiments exploring conversational models using 
 
 **File:** `chat.py`
 
-A simple LangChain experiment that sends a prompt to a Groq-hosted language model and prints its response.
+A simple LangChain experiment that sends prompts to a Groq-hosted language model and displays the response.
 
 ### 2. AI Assistant Chatbot
 
 **File:** `chatbot.py`
 
-An interactive Streamlit chatbot with three AI personality modes:
+An interactive Streamlit chatbot experimenting with different AI personality modes:
 
-- **Angry Mode:** Uses playful sarcasm while aiming to provide useful answers.
-- **Calm Mode:** Focuses on polite, patient, easy-to-understand explanations.
-- **Funny Mode:** Uses humor and a playful tone while answering questions.
+- **Angry Mode:** Playful sarcasm while aiming to provide useful answers.
+- **Calm Mode:** Polite, patient, easy-to-understand explanations.
+- **Funny Mode:** Humorous and playful responses.
 
-The chatbot uses LangChain message objects to maintain conversation history during the session.
+Uses LangChain message objects to maintain conversation history during the session.
 
 ### 3. Hugging Face Endpoint
 
 **File:** `hugingface.py`
 
-Experiments with remote model inference using `HuggingFaceEndpoint` and `ChatHuggingFace`. The script is configured to query `deepseek-ai/DeepSeek-R1`.
+Experiments with remote model inference using `HuggingFaceEndpoint` and `ChatHuggingFace`. The configured model is `deepseek-ai/DeepSeek-R1`.
 
 ### 4. Local Hugging Face Pipeline
 
 **File:** `localmodel.py`
 
-Uses `HuggingFacePipeline` with `ChatHuggingFace` to run a text-generation model locally. The configured model is `Qwen/Qwen2.5-0.5B-Instruct`.
+Experiments with local text generation using `HuggingFacePipeline` and `ChatHuggingFace`. The configured model is `Qwen/Qwen2.5-0.5B-Instruct`.
 
-### 5. Additional Chatbot Interface
+Local inference depends on available hardware, installed dependencies, and model compatibility.
+
+### 5. Dark AI Chatbot Interface
 
 **File:** `UIchatbot.py`
 
-An additional chatbot implementation with a Streamlit interface.
+A Streamlit chatbot experiment featuring a dark-themed interface and Groq-powered conversational responses.
+
+This implementation is separate from the main `portfolio.py` application in the repository root.
 
 ## Tech Stack
 
@@ -52,17 +56,17 @@ An additional chatbot implementation with a Streamlit interface.
 
 ## Setup
 
-1. Install the dependencies from the repository's root `requirements.txt`.
-2. Configure the environment variables required by the model you want to use.
-3. For Groq, create a `.env` file in the repository root containing:
+Install the dependencies listed in the repository's root `requirements.txt` and configure the credentials required by the model you want to use.
+
+For Groq-based experiments, create a `.env` file in the repository root:
 
 ```text
 GROQ_API_KEY=your_groq_api_key
 ```
 
-4. For Hugging Face endpoint access, configure your Hugging Face token if required by the selected model.
+Configure a Hugging Face token if required by the selected endpoint or model.
 
-**Security:** Never commit API keys or tokens to GitHub.
+**Security:** Never commit API keys, access tokens, or other secrets to GitHub.
 
 ## Run the Scripts
 
@@ -74,7 +78,7 @@ Run these commands from the repository root.
 python chatmodels/chat.py
 ```
 
-**Streamlit chatbot**
+**AI Assistant chatbot**
 
 ```bash
 streamlit run chatmodels/chatbot.py
@@ -92,7 +96,7 @@ python chatmodels/hugingface.py
 python chatmodels/localmodel.py
 ```
 
-**Additional Streamlit chatbot interface**
+**Dark AI chatbot interface**
 
 ```bash
 streamlit run chatmodels/UIchatbot.py
@@ -100,10 +104,10 @@ streamlit run chatmodels/UIchatbot.py
 
 ## Notes
 
-- Remote inference requires network access and any necessary credentials.
-- Local inference may download model files and requires sufficient system resources.
-- The Hugging Face endpoint script currently uses a machine-specific `.env` path. Update that path for your own environment if necessary.
-- Model availability and access requirements can change.
+- Remote inference requires network access and may require API credentials.
+- Local inference can download model files and requires sufficient system resources.
+- Model availability, access permissions, and dependency compatibility may change.
+- Keep credentials in environment variables or an ignored `.env` file.
 
 ## Author
 
