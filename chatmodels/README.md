@@ -56,7 +56,15 @@ This implementation is separate from the main `portfolio.py` application in the 
 
 ## Setup
 
-Install the dependencies listed in the repository's root `requirements.txt` and configure the credentials required by the model you want to use.
+Install the dependencies listed in the repository's root `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
+
+The root requirements file provides the shared environment for these experiments. Some scripts, especially local Hugging Face inference, may require additional model-specific dependencies depending on the installed versions and hardware.
+
+Configure the credentials required by the model you want to use before running it.
 
 For Groq-based experiments, create a `.env` file in the repository root:
 
