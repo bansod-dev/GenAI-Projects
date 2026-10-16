@@ -27,6 +27,22 @@ Uses the `sentence-transformers/all-MiniLM-L6-v2` model to generate numerical re
 - Hugging Face
 - Sentence Transformers
 
+  ## Setup & Usage
+
+### Install Dependencies
+
+```bash
+pip install langchain-huggingface sentence-transformers
+```
+
+### Run the Example
+
+```bash
+python embidding.py
+```
+
+The first execution may download the pretrained model. The script prints the generated embedding vector and its dimensionality.
+
 ## Project Structure
 
 ```text
