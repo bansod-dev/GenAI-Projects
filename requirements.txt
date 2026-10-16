@@ -15,3 +15,6 @@ uvicorn
 requests
 streamlit
 pydantic
+sentence-transformers
+transformers
+torch
