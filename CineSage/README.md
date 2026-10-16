@@ -9,7 +9,7 @@ CineSage is a GenAI application that extracts useful movie details from user-pro
   **[🚀 Try the Live Demo](https://genai-projects-3hmgd8gx28e4nhzuhnp6xp.streamlit.app/)**
 
 
-  ![CineSage application preview](assets/cinesage-preview.png)
+  ![CineSage application preview](cinesage-preview.png.png)
 
 </p>
 
