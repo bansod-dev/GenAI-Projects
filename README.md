@@ -31,6 +31,8 @@ An LLM-powered application exploring movie information extraction and structured
 
 **Documentation:** [`CineSage README`](CineSage/README.md)
 
+🚀 **Live Demo:** [Try CineSage](https://genai-projects-3hmgd8gx28e4nhzuhnp6xp.streamlit.app/)
+
 ### 3. AI Assistant Chatbot Experiments
 
 A collection of conversational AI implementations exploring different language models and chatbot interfaces.
