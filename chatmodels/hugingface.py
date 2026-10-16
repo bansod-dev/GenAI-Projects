@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 
-load_dotenv(r"C:\Users\ghans\Desktop\Gen AI\.env")
+load_dotenv()
 
 hf_token = os.getenv("HUGGINGFACEHUB_ACCESS_TOKEN")
 
