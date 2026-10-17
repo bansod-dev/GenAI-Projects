@@ -192,11 +192,26 @@ mode_prompts = {
     )
 }
 
-selected_mode = st.selectbox(
-    "✦ Choose your assistant personality",
-    ["Calm", "Funny", "Angry"],
-    index=0
-)
+col1, col2 = st.columns([3, 1])
+
+with col1:
+    selected_mode = st.selectbox(
+        "✦ Choose your assistant personality",
+        ["Calm", "Funny", "Angry"],
+        index=0
+    )
+
+with col2:
+    st.markdown(
+        "<div style='height: 29px'></div>",
+        unsafe_allow_html=True
+    )
+
+    if st.button("＋ New Chat", use_container_width=True):
+        st.session_state.message_history = []
+        st.session_state.active_mode = selected_mode
+        st.rerun()
+
 
 # -----------------------------------------
 # Chat Session
