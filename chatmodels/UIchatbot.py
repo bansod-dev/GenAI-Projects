@@ -222,9 +222,8 @@ if "message_history" not in st.session_state:
 if "active_mode" not in st.session_state:
     st.session_state.active_mode = selected_mode
 
-# Reset conversation when personality changes
+# Update personality without clearing conversation history
 if st.session_state.active_mode != selected_mode:
-    st.session_state.message_history = []
     st.session_state.active_mode = selected_mode
 
 # -----------------------------------------
